@@ -22,8 +22,6 @@ import { loadUser } from './actions/auth';
 
 function App() {
   useEffect(() => {
-    localStorage.token =
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWUzNGQyZGUwMjRmY2U0ZDkyMWJmMTc2In0sImlhdCI6MTU4MDUyOTc0MiwiZXhwIjoxNTgwODg5NzQyfQ.MrqvQFhZcJ82iMJ0ArH23h29ex771qHbCxotUmaigNM';
     store.dispatch(loadUser());
   }, []);
 

@@ -1,3 +1,7 @@
+View live running app - https://salty-shore-22165.herokuapp.com/
+
+Instructions to run locally:
+
 npm init
 
 npm i express express-validator bcryptjs body-parser config firebase jsonwebtoken mongoose request
