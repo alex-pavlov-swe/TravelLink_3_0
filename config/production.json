@@ -1,0 +1,4 @@
+{
+  "mongoURI": "mongodb+srv://alexKamch:alex1948@travellink-zj0nl.mongodb.net/test?retryWrites=true&w=majority",
+  "jwtSecret": "mysecrettoken"
+}
