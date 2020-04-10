@@ -12,7 +12,7 @@ function Home({ lang: { lang }, changeLanguage }) {
     }
   });
   return (
-    <div className="row home align-top full-page">
+    <div className="row home align-top full-page" id="home-page">
       <div className="col-sm-12 text-center align-self-center">
         <header className="app_header">
           <h1>
@@ -52,8 +52,8 @@ function Home({ lang: { lang }, changeLanguage }) {
   );
 }
 
-const mapStateToProps = state => ({
-  lang: state.lang
+const mapStateToProps = (state) => ({
+  lang: state.lang,
 });
 
 export default connect(mapStateToProps, { changeLanguage })(Home);

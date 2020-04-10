@@ -4,7 +4,7 @@ import { login } from '../../actions/auth';
 import PropTypes from 'prop-types';
 import { Redirect, Link } from 'react-router-dom';
 
-function Login({ login, isAuthenticated }) {
+function Login({ login, isAuthenticated, lang: { lang } }) {
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -33,7 +33,7 @@ function Login({ login, isAuthenticated }) {
           <form className="form" onSubmit={e => onSubmit(e)}>
             <h3>
               <i className="fas fa-user" />
-              Log in
+              {lang === 'rus' ? 'Войти в аккаунт' : 'Log in'}
             </h3>
             <div className="form-group">
               <label htmlFor="email">Email</label>
@@ -43,29 +43,51 @@ function Login({ login, isAuthenticated }) {
                 value={email}
                 onChange={e => onChange(e)}
                 required
-                placeholder="Enter your email"
+                placeholder={
+                  lang === 'rus' ? 'Введите e-mail' : 'Enter your email'
+                }
               />
             </div>
             <div className="form-group">
-              <label htmlFor="password">Password</label>
+              <label htmlFor="password">
+                {lang === 'rus' ? 'Пароль' : 'Password'}
+              </label>
               <input
                 type="text"
                 name="password"
                 value={password}
                 onChange={e => onChange(e)}
                 required
-                placeholder="Enter your password"
+                placeholder={
+                  lang === 'rus' ? 'Введите пароль' : 'Enter your password'
+                }
               />
             </div>
-            <button className="btn btn-primary mt-1 mb-2" type="submit">
-              Submit
+            <button className="btn btn-info mt-1 mb-4" type="submit">
+              {lang === 'rus' ? 'Войти' : 'Submit'}
             </button>
             <p>
-              Don't have an account? <Link to="register">Create one</Link> to
-              submit your profile and start being visible for potential
-              employers
+              {lang === 'rus'
+                ? 'У Вас еще нет аккаунта?'
+                : 'Dont have an account?'}{' '}
+              <Link to="register">
+                {lang === 'rus' ? 'Создайте его,' : 'Create one'}
+              </Link>{' '}
+              {lang === 'rus'
+                ? 'чтобы туркомпании могли с Вами связаться.'
+                : 'to submit your profile and start being visible for potential employers'}
             </p>
           </form>
+          <p>
+            {lang === 'rus'
+              ? 'Нащ сервис может помочь начти работу следующим категориям:'
+              : ''}
+          </p>
+          <p>
+            {lang === 'rus'
+              ? 'гид, повар, переводчик, помощник гида, волотнер, водитель вахтовки, автобуса, джипа, микроавтобуса, водитель-гид на легковом автомобиле.'
+              : ''}
+          </p>
         </div>
       </div>
     </Fragment>
@@ -74,11 +96,13 @@ function Login({ login, isAuthenticated }) {
 
 Login.propTypes = {
   login: PropTypes.func.isRequired,
-  isAuthenticated: PropTypes.bool
+  isAuthenticated: PropTypes.bool.isRequired,
+  language: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated
+  isAuthenticated: state.auth.isAuthenticated,
+  lang: state.lang
 });
 
 export default connect(mapStateToProps, { login })(Login);

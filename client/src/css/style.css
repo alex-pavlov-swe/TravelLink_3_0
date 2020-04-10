@@ -52,6 +52,12 @@ h6,
   font-family: 'Lato', sans-serif;
   font-weight: bold;
   font-size: 1rem;
+  height: 80px;
+  border-bottom: 1px solid white;
+}
+
+.navbar-brand {
+  font-size: 1.6rem;
 }
 
 .navbar-mobile-icon {
@@ -64,7 +70,7 @@ h6,
 
 .home {
   position: relative;
-  background: url('../img/home3.jpg') no-repeat center center/cover;
+  background: url('../img/home.jpg') no-repeat center center/cover;
   height: 100vh;
   margin: 0;
 }
@@ -76,9 +82,11 @@ ul.main_page_choice_buttons {
 }
 
 ul.main_page_choice_buttons .btn-home {
-  width: 250px;
-  font-size: 25px;
+  width: 400px;
+  font-size: 1.5rem;
   margin: 5px;
+  font-family: 'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Segoe UI Symbol';
 }
 
 ul.main_page_choice_buttons {
@@ -161,4 +169,8 @@ select {
 .nav-item-lang-rus,
 .nav-item-lang-eng :hover {
   cursor: pointer;
+}
+
+.before_choice_buttons {
+  height: 50px;
 }

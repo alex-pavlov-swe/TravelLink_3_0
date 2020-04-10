@@ -12,20 +12,20 @@ const Navbar = ({
   settings: { mobileMenuDisplay },
   logout,
   changeLanguage,
-  toggleMobileMenu
+  toggleMobileMenu,
 }) => {
-  const changeLanguageHandle = newLang => async dispatch => {
+  const changeLanguageHandle = (newLang) => async (dispatch) => {
     if (lang !== newLang) {
       localStorage.lang = newLang;
       changeLanguage(newLang);
     }
   };
 
-  const toggleMobileMenuHandle = disp => {
+  const toggleMobileMenuHandle = (disp) => {
     toggleMobileMenu(disp);
   };
 
-  const openMobileMenu = e => {
+  const openMobileMenu = (e) => {
     let disp = mobileMenuDisplay;
 
     if (disp === 'mobileMenuHide') {
@@ -37,7 +37,7 @@ const Navbar = ({
     toggleMobileMenuHandle(disp);
   };
 
-  const closeMobileMenu = e => {
+  const closeMobileMenu = (e) => {
     document.getElementById('navbar-mobile').style.display = 'none';
   };
 
@@ -48,13 +48,6 @@ const Navbar = ({
           {lang === 'rus' ? 'Главная' : 'Home'}
         </a>
       </li>
-      {/*
-      <li className="nav-item">
-        <Link className="nav-link" to="/">
-          {lang === 'rus' ? 'Туры' : 'Tours'}
-        </Link>
-      </li>
-      */}
       <li className="nav-item">
         <Link className="nav-link" to="/profiles">
           {lang === 'rus' ? 'Персонал' : 'Profiles'}
@@ -133,10 +126,10 @@ const Navbar = ({
 
   return (
     <Fragment>
-      <nav className="navbar navbar-expand-sm navbar-dark bg-dark text-uppercase mb-0">
+      <nav className="navbar navbar-expand-sm navbar-dark bg-dark text-uppercase mb-0 fixed-top">
         <div className="container">
           <Link className="navbar-brand" to="/">
-            Travel - Link
+            {lang === 'rus' ? 'Гиды Камчатки' : 'Kamchatka Guides'}
           </Link>
           <div className="navbar-desktop">
             <ul className="navbar-nav">
@@ -146,7 +139,7 @@ const Navbar = ({
             </ul>
           </div>
           <div className="navbar-mobile-icon">
-            <div onClick={e => openMobileMenu(e)}>
+            <div onClick={(e) => openMobileMenu(e)}>
               <i className="fas fa-bars"> </i>
             </div>
           </div>
@@ -158,7 +151,7 @@ const Navbar = ({
       >
         <div className="container">
           <div className={mobileMenuDisplay}>
-            <ul className="navbar-nav" onClick={e => closeMobileMenu(e)}>
+            <ul className="navbar-nav" onClick={(e) => closeMobileMenu(e)}>
               {!loading && (
                 <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>
               )}
@@ -176,17 +169,17 @@ Navbar.propTypes = {
   toggleMobileMenu: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   lang: PropTypes.object.isRequired,
-  settings: PropTypes.object.isRequired
+  settings: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   auth: state.auth,
   lang: state.lang,
-  settings: state.settings
+  settings: state.settings,
 });
 
 export default connect(mapStateToProps, {
   logout,
   changeLanguage,
-  toggleMobileMenu
+  toggleMobileMenu,
 })(Navbar);

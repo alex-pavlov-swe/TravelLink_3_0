@@ -5,7 +5,7 @@ import { setAlert } from '../../actions/alert';
 import { register } from '../../actions/auth';
 import PropTypes from 'prop-types';
 
-function Register({ setAlert, register, isAuthenticated }) {
+function Register({ setAlert, register, isAuthenticated, lang: { lang } }) {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -41,10 +41,10 @@ function Register({ setAlert, register, isAuthenticated }) {
           <form className="form" onSubmit={e => onSubmit(e)}>
             <h3>
               <i className="fas fa-user" />
-              Create Your Account
+              {lang === 'rus' ? 'Создать аккаунт' : 'Create Your Account'}
             </h3>
             <div className="form-group">
-              <label htmlFor="name">Name</label>
+              <label htmlFor="name">{lang === 'rus' ? 'Имя' : 'Name'}</label>
               <input
                 className="form-control"
                 type="text"
@@ -52,7 +52,9 @@ function Register({ setAlert, register, isAuthenticated }) {
                 value={name}
                 onChange={e => onChange(e)}
                 required
-                placeholder="Enter your name"
+                placeholder={
+                  lang === 'rus' ? 'Как Вас зовут' : 'Enter your name'
+                }
               />
             </div>
             <div className="form-group">
@@ -64,11 +66,17 @@ function Register({ setAlert, register, isAuthenticated }) {
                 value={email}
                 onChange={e => onChange(e)}
                 required
-                placeholder="Enter your email"
+                placeholder={
+                  lang === 'rus'
+                    ? 'Введите Ваш адрес электронной почты'
+                    : 'Enter your email'
+                }
               />
             </div>
             <div className="form-group">
-              <label htmlFor="password">Password</label>
+              <label htmlFor="password">
+                {lang === 'rus' ? 'Пароль' : 'Password'}
+              </label>
               <input
                 className="form-control"
                 type="text"
@@ -77,11 +85,15 @@ function Register({ setAlert, register, isAuthenticated }) {
                 onChange={e => onChange(e)}
                 required
                 minLength="6"
-                placeholder="Enter your password"
+                placeholder={
+                  lang === 'rus' ? 'Введите пароль' : 'Enter your password'
+                }
               />
             </div>
             <div className="form-group">
-              <label htmlFor="name">Confirm password</label>
+              <label htmlFor="name">
+                {lang === 'rus' ? 'Подтвердить пароль' : 'Confirm password'}
+              </label>
               <input
                 className="form-control"
                 type="text"
@@ -90,16 +102,20 @@ function Register({ setAlert, register, isAuthenticated }) {
                 onChange={e => onChange(e)}
                 required
                 minLength="6"
-                placeholder="Repeat your password"
+                placeholder={
+                  lang === 'rus'
+                    ? 'Введите пароль еще раз'
+                    : 'Repeat your password'
+                }
               />
             </div>
-            <button className="btn btn-primary mt-1 mb-2" type="submit">
-              Register
+            <button className="btn btn-info mt-1 mb-4" type="submit">
+              {lang === 'rus' ? 'Зарегистрироваться' : 'Register'}
             </button>
           </form>
           <p>
-            Already have an account?
-            <Link to="/login"> Sign in</Link>
+            {lang === 'rus' ? 'Уже есть аккаунт?' : 'Already have an account?'}
+            <Link to="/login"> {lang === 'rus' ? 'Войти' : 'Sign in'}</Link>
           </p>
         </div>
       </div>
@@ -110,11 +126,13 @@ function Register({ setAlert, register, isAuthenticated }) {
 Register.propTypes = {
   setAlert: PropTypes.func.isRequired,
   register: PropTypes.func.isRequired,
-  isAuthenticated: PropTypes.bool
+  isAuthenticated: PropTypes.bool,
+  lang: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated
+  isAuthenticated: state.auth.isAuthenticated,
+  lang: state.lang
 });
 
 export default connect(mapStateToProps, { setAlert, register })(Register);
