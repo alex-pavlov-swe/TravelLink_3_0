@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { login } from '../../actions/auth';
 import PropTypes from 'prop-types';
@@ -7,17 +7,17 @@ import { Redirect, Link } from 'react-router-dom';
 function Login({ login, isAuthenticated, lang: { lang } }) {
   const [formData, setFormData] = useState({
     email: '',
-    password: ''
+    password: '',
   });
 
   const { email, password } = formData;
 
-  const onSubmit = e => {
+  const onSubmit = (e) => {
     e.preventDefault();
     login({ email, password });
   };
 
-  const onChange = e => {
+  const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
@@ -27,21 +27,20 @@ function Login({ login, isAuthenticated, lang: { lang } }) {
   }
 
   return (
-    <Fragment>
-      <div className="row mt-4 mb-2 login-container full-page">
-        <div className="col-md-6 offset-md-3 col-sm-12">
-          <form className="form" onSubmit={e => onSubmit(e)}>
+    <div className="container-fluid" id="login">
+      <div className="row">
+        <div className="col-sm-12 text-center">
+          <form className="form" onSubmit={(e) => onSubmit(e)}>
             <h3>
-              <i className="fas fa-user" />
+              <i className="fas fa-user mb-3" />
               {lang === 'rus' ? 'Войти в аккаунт' : 'Log in'}
             </h3>
             <div className="form-group">
-              <label htmlFor="email">Email</label>
               <input
                 type="text"
                 name="email"
                 value={email}
-                onChange={e => onChange(e)}
+                onChange={(e) => onChange(e)}
                 required
                 placeholder={
                   lang === 'rus' ? 'Введите e-mail' : 'Enter your email'
@@ -49,38 +48,32 @@ function Login({ login, isAuthenticated, lang: { lang } }) {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="password">
-                {lang === 'rus' ? 'Пароль' : 'Password'}
-              </label>
               <input
                 type="text"
                 name="password"
                 value={password}
-                onChange={e => onChange(e)}
+                onChange={(e) => onChange(e)}
                 required
                 placeholder={
                   lang === 'rus' ? 'Введите пароль' : 'Enter your password'
                 }
               />
             </div>
-            <button className="btn btn-info mt-1 mb-4" type="submit">
-              {lang === 'rus' ? 'Войти' : 'Submit'}
-            </button>
+            <div className="form-group">
+              <button className="btn btn-primary mt-1 mb-4" type="submit">
+                {lang === 'rus' ? 'Войти' : 'Sign in'}
+              </button>
+            </div>
             <p>
-              {lang === 'rus'
-                ? 'У Вас еще нет аккаунта?'
-                : 'Dont have an account?'}{' '}
+              {lang === 'rus' ? 'У Вас еще нет аккаунта?' : 'Not a member?'}{' '}
               <Link to="register">
-                {lang === 'rus' ? 'Создайте его,' : 'Create one'}
-              </Link>{' '}
-              {lang === 'rus'
-                ? 'чтобы туркомпании могли с Вами связаться.'
-                : 'to submit your profile and start being visible for potential employers'}
+                {lang === 'rus' ? 'Создайте его.' : 'Sign up here.'}
+              </Link>
             </p>
           </form>
           <p>
             {lang === 'rus'
-              ? 'Нащ сервис может помочь начти работу следующим категориям:'
+              ? 'Наш сервис может помочь начти работу следующим категориям:'
               : ''}
           </p>
           <p>
@@ -90,19 +83,19 @@ function Login({ login, isAuthenticated, lang: { lang } }) {
           </p>
         </div>
       </div>
-    </Fragment>
+    </div>
   );
 }
 
 Login.propTypes = {
   login: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
-  language: PropTypes.object.isRequired
+  language: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
-  lang: state.lang
+  lang: state.lang,
 });
 
 export default connect(mapStateToProps, { login })(Login);

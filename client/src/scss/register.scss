@@ -1,0 +1,23 @@
+@import './variables.scss';
+
+#register {
+  height: 100vh;
+  background-image: url('../img/auth.jpg');
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -$navbar-height;
+  .form {
+    background-color: white;
+    border-radius: 5px;
+    width: 300px;
+    padding: 20px;
+    input {
+      border-radius: 5px;
+      padding: 5px;
+    }
+    button {
+      width: 100%;
+    }
+  }
+}

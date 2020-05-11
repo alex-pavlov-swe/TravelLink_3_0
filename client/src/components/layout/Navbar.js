@@ -126,7 +126,7 @@ const Navbar = ({
 
   return (
     <Fragment>
-      <nav className="navbar navbar-expand-sm navbar-dark bg-dark text-uppercase mb-0 fixed-top">
+      <nav className="navbar navbar-expand-sm navbar-dark bg-dark text-uppercase mb-0">
         <div className="container">
           <Link className="navbar-brand" to="/">
             {lang === 'rus' ? 'Гиды Камчатки' : 'Kamchatka Guides'}

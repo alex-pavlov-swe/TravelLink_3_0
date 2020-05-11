@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import { setAlert } from '../../actions/alert';
@@ -10,12 +10,12 @@ function Register({ setAlert, register, isAuthenticated, lang: { lang } }) {
     name: '',
     email: '',
     password: '',
-    password2: ''
+    password2: '',
   });
 
   const { name, email, password, password2 } = formData;
 
-  const onSubmit = async e => {
+  const onSubmit = async (e) => {
     e.preventDefault();
 
     if (password !== password2) {
@@ -25,7 +25,7 @@ function Register({ setAlert, register, isAuthenticated, lang: { lang } }) {
     }
   };
 
-  const onChange = e => {
+  const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
@@ -35,22 +35,21 @@ function Register({ setAlert, register, isAuthenticated, lang: { lang } }) {
   }
 
   return (
-    <Fragment>
-      <div className="row mt-2 mb-2 full-page">
-        <div className="col-md-6 offset-md-3 col-sm-12">
-          <form className="form" onSubmit={e => onSubmit(e)}>
+    <div className="container-fluid" id="register">
+      <div className="row">
+        <div className="col-sm-12 text-center">
+          <form className="form" onSubmit={(e) => onSubmit(e)}>
             <h3>
-              <i className="fas fa-user" />
-              {lang === 'rus' ? 'Создать аккаунт' : 'Create Your Account'}
+              <i className="fas fa-user mb-3" />
+              {lang === 'rus' ? 'Создать аккаунт' : 'Sign up'}
             </h3>
             <div className="form-group">
-              <label htmlFor="name">{lang === 'rus' ? 'Имя' : 'Name'}</label>
               <input
                 className="form-control"
                 type="text"
                 name="name"
                 value={name}
-                onChange={e => onChange(e)}
+                onChange={(e) => onChange(e)}
                 required
                 placeholder={
                   lang === 'rus' ? 'Как Вас зовут' : 'Enter your name'
@@ -58,13 +57,12 @@ function Register({ setAlert, register, isAuthenticated, lang: { lang } }) {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="email">Email</label>
               <input
                 className="form-control"
                 type="text"
                 name="email"
                 value={email}
-                onChange={e => onChange(e)}
+                onChange={(e) => onChange(e)}
                 required
                 placeholder={
                   lang === 'rus'
@@ -74,15 +72,12 @@ function Register({ setAlert, register, isAuthenticated, lang: { lang } }) {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="password">
-                {lang === 'rus' ? 'Пароль' : 'Password'}
-              </label>
               <input
                 className="form-control"
                 type="text"
                 name="password"
                 value={password}
-                onChange={e => onChange(e)}
+                onChange={(e) => onChange(e)}
                 required
                 minLength="6"
                 placeholder={
@@ -91,15 +86,12 @@ function Register({ setAlert, register, isAuthenticated, lang: { lang } }) {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="name">
-                {lang === 'rus' ? 'Подтвердить пароль' : 'Confirm password'}
-              </label>
               <input
                 className="form-control"
                 type="text"
                 name="password2"
                 value={password2}
-                onChange={e => onChange(e)}
+                onChange={(e) => onChange(e)}
                 required
                 minLength="6"
                 placeholder={
@@ -109,17 +101,19 @@ function Register({ setAlert, register, isAuthenticated, lang: { lang } }) {
                 }
               />
             </div>
-            <button className="btn btn-info mt-1 mb-4" type="submit">
-              {lang === 'rus' ? 'Зарегистрироваться' : 'Register'}
+            <button className="btn btn-primary mt-1 mb-4" type="submit">
+              {lang === 'rus' ? 'Зарегистрироваться' : 'Sign up'}
             </button>
+            <p>
+              {lang === 'rus'
+                ? 'Уже есть аккаунт?'
+                : 'Already have an account?'}
+              <Link to="/login"> {lang === 'rus' ? 'Войти' : 'Sign in'}</Link>
+            </p>
           </form>
-          <p>
-            {lang === 'rus' ? 'Уже есть аккаунт?' : 'Already have an account?'}
-            <Link to="/login"> {lang === 'rus' ? 'Войти' : 'Sign in'}</Link>
-          </p>
         </div>
       </div>
-    </Fragment>
+    </div>
   );
 }
 
@@ -127,12 +121,12 @@ Register.propTypes = {
   setAlert: PropTypes.func.isRequired,
   register: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool,
-  lang: PropTypes.object.isRequired
+  lang: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
-  lang: state.lang
+  lang: state.lang,
 });
 
 export default connect(mapStateToProps, { setAlert, register })(Register);
