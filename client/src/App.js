@@ -50,7 +50,6 @@ function App() {
             component={CreateCompany}
           />
         </Switch>
-        <Footer />
       </Router>
     </Provider>
   );
