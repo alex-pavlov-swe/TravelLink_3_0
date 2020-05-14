@@ -126,22 +126,35 @@ const Navbar = ({
 
   return (
     <Fragment>
-      <nav className="navbar navbar-expand-sm navbar-dark bg-dark text-uppercase mb-0">
+      <nav
+        className="navbar navbar-expand-lg navbar-dark bg-dark text-uppercase mb-0"
+        id="main-navbar"
+      >
         <div className="container">
           <Link className="navbar-brand" to="/">
             {lang === 'rus' ? 'Гиды Камчатки' : 'Kamchatka Guides'}
           </Link>
-          <div className="navbar-desktop">
-            <ul className="navbar-nav">
+          <button
+            className="navbar-toggler "
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarResponsive"
+            aria-controls="navbarResponsive"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+
+          <div
+            className="collapse navbar-collapse bg-dark"
+            id="navbarResponsive"
+          >
+            <ul className="navbar-nav ml-auto">
               {!loading && (
                 <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>
               )}
             </ul>
-          </div>
-          <div className="navbar-mobile-icon">
-            <div onClick={(e) => openMobileMenu(e)}>
-              <i className="fas fa-bars"> </i>
-            </div>
           </div>
         </div>
       </nav>
