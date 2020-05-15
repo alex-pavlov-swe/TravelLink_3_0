@@ -12,8 +12,10 @@ function Login({ login, isAuthenticated, lang: { lang } }) {
   });
 
   useEffect(() => {
-    document.getElementById('login-form').classList.add('show');
-  });
+    if (document.getElementById('login-form')) {
+      document.getElementById('login-form').classList.add('show');
+    }
+  }, []);
 
   const { email, password } = formData;
 

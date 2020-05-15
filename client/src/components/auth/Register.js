@@ -31,7 +31,9 @@ function Register({ setAlert, register, isAuthenticated, lang: { lang } }) {
   };
 
   useEffect(() => {
-    document.getElementById('register-form').classList.add('show');
+    if (document.getElementById('register-form')) {
+      document.getElementById('register-form').classList.add('show');
+    }
   });
 
   // Redirect if logged in

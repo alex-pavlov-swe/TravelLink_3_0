@@ -135,7 +135,7 @@ const Navbar = ({
             {lang === 'rus' ? 'Гиды Камчатки' : 'Kamchatka Guides'}
           </Link>
           <button
-            className="navbar-toggler "
+            className="navbar-toggler"
             type="button"
             data-toggle="collapse"
             data-target="#navbarResponsive"
